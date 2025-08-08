@@ -16,8 +16,8 @@ cd CryptoApp
 
 1. Распакуйте проект:
 ```bash
-unzip testYTask.zip
-cd testYTask
+unzip CryptoApp.zip
+cd CryptoApp
 ```
 
 2. Запустите через Docker:
