@@ -8,7 +8,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone git@github.com:Monste11osz/CryptoApp.git
+git clone https://github.com/Monste11osz/CryptoApp.git
 cd CryptoApp
 ```
 
