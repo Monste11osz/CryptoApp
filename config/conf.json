@@ -1,0 +1,35 @@
+{
+  "App": {
+    "APP_MODE": "debug",
+    "APP_PORT": 8080,
+    "APP_STAGE": "staging",
+    "APP_RTO": 60,
+    "APP_WTO": 60
+  },
+  "CORS": {
+    "ALLOW_ORIGINS": ["*"],
+    "ALLOW_METHODS": ["GET", "POST", "DELETE"],
+    "ALLOW_HEADERS": [
+      "Origin",
+      "Authorization",
+      "Content-Type"
+    ]
+  },
+  "DB": {
+    "PORT": "5432",
+    "HOST": "localhost",
+    "USER": "admin",
+    "PASS": "123123",
+    "NAME": "diplomdb"
+  },
+  "EXCHANGE": {
+    "URL_LIST_COIN": "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1",
+    "URL_PRICE": "https://api.coingecko.com/api/v3/simple/price?ids=%s&vs_currencies=usd"
+  },
+  "SWAGGER": {
+    "SWAG_TITLE": "Crypto Price Service",
+    "SWAG_DESCRIPTION": "Сервис для работы с криптовалютами: получение цены по временной метке, добавление и удаление монет из списка.",
+    "VERSION": "1.0",
+    "BASE_URL": "http://localhost:8080/api/v1"
+  }
+}

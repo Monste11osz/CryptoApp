@@ -1,0 +1,137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Crypto Price Service",
+    "description": "Сервис для получения цен криптовалют, добавления и удаления монет",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/currency/price": {
+      "post": {
+        "summary": "Получить цену криптовалюты",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "coin": { "type": "string", "example": "bitcoin" },
+                "timestamp": { "type": "integer", "example": 1754603100 }
+              },
+              "required": ["coin", "timestamp"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "schema": {
+              "type": "object",
+              "example": {
+                "status": "OK",
+                "data": {
+                  "coin": "bitcoin",
+                  "price": 117200,
+                  "currency": "USD",
+                  "timestamp": 1754603017
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректный запрос",
+            "schema": { "type": "object", "example": { "status": "ERROR", "message": "Invalid request" } }
+          },
+          "404": {
+            "description": "Цена не найдена",
+            "schema": { "type": "object", "example": { "status": "NotFound", "message": "Price not found" } }
+          },
+          "500": {
+            "description": "Ошибка сервиса при получении данных",
+            "schema": { "type": "object", "example": { "status": "ERROR", "message": "Error while receiving data" } }
+          }
+        }
+      }
+    },
+    "/currency/add": {
+      "post": {
+        "summary": "Добавить криптовалюту в список",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name_coin": { "type": "string", "example": "bitcoin" }
+              },
+              "required": ["name_coin"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Монета добавлена",
+            "schema": { "type": "object", "example": { "status": "OK", "message": "Coin 'bitcoin' added", "data": {} } }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "schema": { "type": "object", "example": { "status": "ERROR", "message": "Incorrect input data" } }
+          },
+          "404": {
+            "description": "Монета не найдена",
+            "schema": { "type": "object", "example": { "status": "ERROR", "message": "Coin not found" } }
+          },
+          "500": {
+            "description": "Ошибка сервиса при добавлении",
+            "schema": { "type": "object", "example": { "status": "ERROR", "message": "Service error while adding" } }
+          }
+        }
+      }
+    },
+    "/currency/remove": {
+      "delete": {
+        "summary": "Удалить криптовалюту из списка",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name_coin": { "type": "string", "example": "bitcoin" }
+              },
+              "required": ["name_coin"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Монета удалена",
+            "schema": { "type": "object", "example": { "status": "OK", "message": "Coin deleted", "data": {} } }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "schema": { "type": "object", "example": { "status": "ERROR", "message": "Incorrect input data" } }
+          },
+          "404": {
+            "description": "Монета отсутствует в списке",
+            "schema": { "type": "object", "example": { "status": "ERROR", "message": "This coin is not on the list" } }
+          },
+          "500": {
+            "description": "Ошибка сервиса при удалении",
+            "schema": { "type": "object", "example": { "status": "ERROR", "message": "Service error while deleting" } }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:14.18
+    container_name: pg_crypto
+    environment:
+      POSTGRES_DB: diplomdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123123
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
+
+  app:
+    build: .
+    container_name: crypto_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      CONFIG_PATH: /app/config/conf.json
+    volumes:
+      - ./config:/app/config
+    restart: unless-stopped
+
+volumes:
+  pgdata:
